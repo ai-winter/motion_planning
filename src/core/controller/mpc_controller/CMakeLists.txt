@@ -44,3 +44,9 @@ target_link_libraries(${PROJECT_NAME}
   ${catkin_LIBRARIES}
   ${CONAN_LIBS}
 )
+
+# add custom target to copy libmpc_controller.so from build to devel dir.
+add_custom_command(
+  TARGET ${PROJECT_NAME} POST_BUILD
+  COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:${PROJECT_NAME}> ${CATKIN_DEVEL_PREFIX}/lib/
+)
